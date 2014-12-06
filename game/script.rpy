@@ -19,6 +19,9 @@ init python:
     location = Location()
     player_location = Location()
     clue = ''
+    fuel = 100.00
+    fuel_difficulty = 20.00
+    max_fuel = 100.00
 
     mercury = Location('Mercury')
     mercury.add_clue('the closest planet to the sun')
@@ -94,6 +97,24 @@ init python:
             if l.name == loc:
                 return l
 
+    def fuel_guage(st, at):
+
+        ui.frame(xfill=False, yminimum=None,  xalign=.02, yalign=.05)
+
+        ui.vbox() # (name, "HP", bar) from (level, hp, maxhp)
+
+        ui.text("Fuel", size=20)
+
+        ui.hbox() # "HP" from bar
+        ui.bar(max_fuel, fuel,
+               max_fuel=150)
+
+        ui.close()
+        ui.close()
+
+    def get_fuel_percentage():
+        return int(fuel / max_fuel * 100)
+
 define e = Character('Computer', color="#c8ffc8")
 
 define agent_x = Character('Agent X', color="#c8ffc8")
@@ -108,22 +129,9 @@ label start:
 
 label location:
     $ location = next_location()
-
     $ x_clue = location.get_rand_clue()
     $ y_clue = location.get_rand_clue()
     jump location_actions
-
-
-label good_location:
-    e "You have arrived at [player_location.name]."
-    e "You are hot on the trail! Seems like the fugitive has been here recently."
-    jump location
-
-
-label bad_location:
-    e "You have arrived at [player_location.name]."
-    e "Doesn't seem to be any criminal activity around here."
-    jump leave_location
 
 label location_actions:
     menu:
@@ -149,11 +157,18 @@ label leave_location:
     e "Traveling to [destination]"
 
     $ player_location = get_location_by_name(destination)
+    $ fuel = fuel - fuel_difficulty
+    e "You have arrived at [player_location.name]."
+    $ fuel_p = get_fuel_percentage()
+    e "Fuel levels are currently at [fuel_p] percent"
 
     if location.name == player_location.name:
-        jump good_location
+        e "You are hot on the trail! Seems like the fugitive has been here recently."
+        jump location
     else:
-        jump bad_location
+        e "Doesn't seem to be any criminal activity around here. Perhaps you should review the clues again."
+        jump location_actions
+
 
 
 label question_agent:

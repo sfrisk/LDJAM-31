@@ -17,26 +17,27 @@ init python:
 
     locations = []
     location = Location()
-    old_location = Location()
+    player_location = Location()
+    clue = ''
 
     mercury = Location('Mercury')
-    mercury.add_clue('I heard they were going to the closest planet to the sun')
-    mercury.add_clue("They're going to a place named after the Messenger to the gods")
+    mercury.add_clue('the closest planet to the sun')
+    mercury.add_clue("a place named after the Messenger to the gods")
     locations.append(mercury)
 
     venus = Location('Venus')
-    venus.add_clue("They're going to the sister of Earth")
-    venus.add_clue("It may be beautiful where they're going, but be careful not to breath the air! It's mostly carbon dioxide with a small amount of nitrogen")
+    venus.add_clue("the sister of Earth")
+    venus.add_clue("beautiful world filled with carbon dioxide with a small amount of nitrogen")
     locations.append(venus)
 
 
     earth = Location('Earth')
-    earth.add_clue("The twin of Venus")
-    earth.add_clue("I won't be needing a space suit where I'm going!")
+    earth.add_clue("the twin of Venus")
+    earth.add_clue("a world where a no spacesuit would be required")
     locations.append(earth)
 
     mars = Location('Mars')
-    mars.add_clue("War! All the War!")
+    mars.add_clue("a monument to the god of war")
     mars.add_clue("Mars Clue 2")
     locations.append(mars)
 
@@ -84,6 +85,8 @@ init python:
                 menu.append((c.name, c.name))
             else:
                 menu.append((c.name, c.name))
+
+        menu.append(("Collect More Evidence","Back"))
         return renpy.display_menu(menu)
 
     def get_location_by_name(loc):
@@ -91,41 +94,94 @@ init python:
             if l.name == loc:
                 return l
 
-define e = Character('Eileen', color="#c8ffc8")
+define e = Character('Computer', color="#c8ffc8")
+
+define agent_x = Character('Agent X', color="#c8ffc8")
+define agent_y = Character('Agent Y', color="#c8ffc8")
 
 # The game starts here.
 label start:
 
     $ villain = newVillain()
-    $ location = next_location()
     show black
     e "[villain.name], [villain.pronoun] has escaped!"
-    e "[villain.bio]"
-    e "But we have a clue!"
-    $ clue = location.get_rand_clue()
-    "[clue]"
 
+label location:
+    $ location = next_location()
+
+    $ x_clue = location.get_rand_clue()
+    $ y_clue = location.get_rand_clue()
+    jump location_actions
+
+
+label good_location:
+    e "You have arrived at [player_location.name]."
+    e "You are hot on the trail! Seems like the fugitive has been here recently."
+    jump location
+
+
+label bad_location:
+    e "You have arrived at [player_location.name]."
+    e "Doesn't seem to be any criminal activity around here."
+    jump leave_location
+
+label location_actions:
+    menu:
+        e "What would you like to do?"
+        "Question Agent X":
+            $ active_agent = agent_x
+            jump question_agent
+        "Question Agent Y":
+            $ active_agent = agent_y
+            jump question_agent
+        "Record Evidence":
+            jump record_evidence
+        "Travel":
+            jump leave_location
+
+label leave_location:
     $ destination = location_menu(location)
 
-    "Traveling to [destination]"
+    if destination == 'Back':
+        e "Ok, let's gather more evidence."
+        jump location_actions
 
-    $ old_location = copy.deepcopy(location)
-    $ location = get_location_by_name(destination)
+    e "Traveling to [destination]"
 
-    if location.name == old_location.name:
+    $ player_location = get_location_by_name(destination)
+
+    if location.name == player_location.name:
         jump good_location
     else:
         jump bad_location
 
-    return
-label good_location:
-    e "You have arrived at [location.name]."
-    e "You picked right!"
-    pause
-    return
 
-label bad_location:
-    e "You have arrived at [location.name]."
-    e "You picked wrong!"
-    pause
-    return
+label question_agent:
+    active_agent "What would you like to know, boss?"
+    menu:
+        "Where did the suspect go?":
+            jump where_suspect
+        "Tell me about the suspect":
+            jump describe_suspect
+        "Very good agent. You're dismissed.":
+            jump dismiss_agent
+
+label where_suspect:
+    if active_agent == agent_x:
+        $ clue = x_clue
+    else:
+        $ clue = y_clue
+    active_agent "Local rumor states [villain.pronoun] said he was going to [clue]"
+    jump question_agent
+
+label describe_suspect:
+    active_agent "Traits aren't supported yet. TODO"
+    jump question_agent
+
+label dismiss_agent:
+    active_agent "Yes, sir!"
+    jump location_actions
+
+label record_evidence:
+    e "Recording evidence isn't currently supported"
+    jump location_actions

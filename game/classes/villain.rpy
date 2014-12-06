@@ -7,13 +7,13 @@ init python:
             self.sex = sex
             self.hair = hair
             self.eyes = eyes
+            self.pronoun = self.get_pronoun()
 
+        def get_pronoun(self):
             if self.sex == 'Male':
-                self.pronoun = "he"
+                return "he"
             else:
-                self.pronoun = "she"
-
-
+                return "she"
 
         def get_possessive(self):
             if self.sex == 'Male':

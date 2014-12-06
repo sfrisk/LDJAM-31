@@ -8,12 +8,14 @@ label start:
 
     $ villain = newVillain()
     show black
-    e "[villain.name], [villain.pronoun] has escaped!"
+    e "A thing has been stollen!"
 
 label location:
     $ location = next_location()
     $ x_clue = location.get_rand_clue()
     $ y_clue = location.get_rand_clue()
+    $ x_trait = get_character_clue()
+    $ y_trait = get_character_clue()
     jump location_actions
 
 label location_actions:
@@ -22,9 +24,9 @@ label location_actions:
         "Question Agent X":
             $ active_agent = agent_x
             jump question_agent
-        "Question Agent Y":
-            $ active_agent = agent_y
-            jump question_agent
+        # "Question Agent Y":
+        #     $ active_agent = agent_y
+        #     jump question_agent
         "Record Evidence":
             jump record_evidence
         "Travel":
@@ -72,11 +74,15 @@ label where_suspect:
         $ clue = x_clue
     else:
         $ clue = y_clue
-    active_agent "Local rumor states [villain.pronoun] said he was going to [clue]"
+    active_agent "Local rumor states [villain.pronoun] said he was going to [clue]."
     jump question_agent
 
 label describe_suspect:
-    active_agent "Traits aren't supported yet. TODO"
+    if active_agent == agent_x:
+        $ clue = x_trait
+    else:
+        $ clue = y_trait
+    active_agent "Local rumor states [villain.pronoun] had [clue]."
     jump question_agent
 
 label dismiss_agent:
@@ -84,7 +90,7 @@ label dismiss_agent:
     jump location_actions
 
 label record_evidence:
-    e "Recording evidence isn't currently supported"
+    e "Recording evidence isn't currently supported."
     jump location_actions
 
 

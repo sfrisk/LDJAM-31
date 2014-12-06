@@ -1,0 +1,12 @@
+# compiled renpy files
+*.rpyb
+*.rpy.bak
+*.rpyc
+
+# the tmp folder
+tmp/
+
+# Saves
+game/saves/persistent
+
+log.txt

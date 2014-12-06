@@ -162,6 +162,9 @@ label leave_location:
     $ fuel_p = get_fuel_percentage()
     e "Fuel levels are currently at [fuel_p] percent"
 
+    if fuel_p == 0:
+        jump game_over
+
     if location.name == player_location.name:
         e "You are hot on the trail! Seems like the fugitive has been here recently."
         jump location
@@ -200,3 +203,8 @@ label dismiss_agent:
 label record_evidence:
     e "Recording evidence isn't currently supported"
     jump location_actions
+
+
+label game_over:
+    e "Unfortunately, you're all out of fuel. Game over!"
+    return

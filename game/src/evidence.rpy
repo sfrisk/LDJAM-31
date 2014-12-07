@@ -30,8 +30,8 @@ init python:
 
         while True:
 
-            ui.frame(xpos=20,
-                     ypos=100,
+            ui.frame(xpos=50,
+                     ypos=60,
                      xanchor='left',
                      yanchor='top',
                      xfill=False,
@@ -54,7 +54,7 @@ init python:
             ui.close()
 
             ui.frame(xpos=0.5,
-                     ypos=.9,
+                     ypos=.7,
                      xanchor='center',
                      yanchor='bottom',
                      xfill=False,
@@ -76,7 +76,7 @@ init python:
             # Choice window.
             if editing:
                 ui.frame(xpos=400,
-                         ypos=100,
+                         ypos=70,
                          xanchor='left',
                          yanchor='top',
                          xfill=False,

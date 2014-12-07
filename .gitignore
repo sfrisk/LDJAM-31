@@ -3,6 +3,8 @@
 *.rpy.bak
 *.rpyc
 
+*.psd
+
 # the tmp folder
 tmp/
 

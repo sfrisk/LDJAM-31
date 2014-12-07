@@ -7,19 +7,31 @@ init python:
     player_location = Location()
 
     mercury = Location('Mercury')
-    mercury.add_clue('the closest planet to the sun')
-    mercury.add_clue("a place named after the Messenger to the gods")
+    mercury.add_clue('hoping to get a lot closer to the sun')
+    mercury.add_clue("going to a planet named after an ancient Messenger to the Gods")
+    mercury.add_clue("going somewhere where the year lasts only 88 days")
+    mercury.add_clue("going to the second densest planet in the system")
+    mercury.add_clue("going to the second hottest planet in our glorious empire")
+    mercury.add_clue("in the process of buying some extreme weather gear. Surface temperatures at their destination ranges from -173 to 427 Celcius")
     locations.append(mercury)
 
     venus = Location('Venus')
-    venus.add_clue("the sister of Earth")
-    venus.add_clue("beautiful world filled with carbon dioxide with a small amount of nitrogen")
+    venus.add_clue("hoping to visit the sister of Earth")
+    venus.add_clue("going to a terestial planet that rotates counter-clockwise")
+    venus.add_clue("the second brightest object in the sky after the Moon")
+    venus.add_clue("going to the second largest terrestrial planet in our glorious empire")
+    venus.add_clue("going to a planet named after the Roman goddess of love and beauty")
+    venus.add_clue("world filled with carbon dioxide with a small amount of nitrogen")
+    venus.add_clue("going to the hottest planet in our solar system")
     locations.append(venus)
 
 
     earth = Location('Earth')
-    earth.add_clue("the twin of Venus")
-    earth.add_clue("a world where a no spacesuit would be required")
+    earth.add_clue("interested in seeing the twin of Venus")
+    earth.add_clue("heading to a planet not named after a god")
+    earth.add_clue("prepping for a trip to the largest terrestrial planet")
+    earth.add_clue("heading to a world where a no spacesuit would be required")
+    earth.add_clue("interested in spending some time about 1 AU away from the sun")
     locations.append(earth)
 
     mars = Location('Mars')
@@ -50,8 +62,15 @@ init python:
     locations.append(neptune)
 
 
-    def next_location():
-        return locations[randrange(len(locations))]
+    def next_location(loc):
+        locations_copy = copy.deepcopy(locations)
+
+        if loc != None:
+            for l in locations_copy:
+                if l.name == loc.name:
+                    locations_copy.remove(l)
+
+        return locations_copy[randrange(len(locations_copy))]
 
     def location_menu(loc):
         locations_copy = copy.deepcopy(locations)

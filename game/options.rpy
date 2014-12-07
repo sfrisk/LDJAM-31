@@ -200,7 +200,7 @@ init -1 python hide:
     ## - A file name relative to the base directory, which is opened in a
     ##   web browser.
     ## - None, to disable help.
-    config.help = "README.html"
+    config.help = None
 
 
     #########################################
@@ -282,7 +282,7 @@ init -1 python hide:
 
     ## The default auto-forward time setting.
 
-    config.default_afm_time = 10
+    config.default_afm_time = None
 
     #########################################
     ## More customizations can go here.
@@ -350,4 +350,3 @@ init python:
 
     build.documentation('*.html')
     build.documentation('*.txt')
-    

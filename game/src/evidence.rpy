@@ -68,6 +68,8 @@ init python:
             if len(calculate_match(evidence)) > 1:
                 renpy.store.criminal_matches = str(len(calculate_match(evidence)))
                 ui.text(_("[criminal_matches!t] possible matches"))
+            elif len(calculate_match(evidence)) is 0:
+                ui.text(_("No matches found"))
             else:
                 renpy.store.criminal_name = calculate_match(evidence)[0].name
                 ui.text(_("{b}Match Found!{/b}"))

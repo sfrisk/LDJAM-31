@@ -197,7 +197,10 @@ label record_evidence:
     $ evidence = evidence_recorder(evidence)
     $ matches = calculate_match(evidence)
     $ no_of_matches = len(matches)
-    $ warrent = matches[0].name
+    if no_of_matches is 0:
+        $ warrent = None
+    else:
+        $ warrent = matches[0].name
     hide computer normal
     show ig_bot normal
     show computer normal

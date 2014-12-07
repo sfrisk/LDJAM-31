@@ -189,6 +189,8 @@ init -1 python hide:
 
     # config.main_menu_music = "main_menu_theme.ogg"
 
+    config.allow_skipping = False
+    config.hard_rollback_limit = 0
 
     #########################################
     ## Help.

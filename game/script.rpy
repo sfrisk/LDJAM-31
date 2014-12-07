@@ -52,9 +52,7 @@ label start:
 label location:
     $ location = next_location(player_location)
     $ x_clue = location.get_rand_clue()
-    $ y_clue = location.get_rand_clue()
-    $ x_trait = get_character_clue()
-    $ y_trait = get_character_clue()
+    $ x_trait = get_character_clue(fuel_p)
 
     jump location_actions
 
@@ -93,7 +91,7 @@ label leave_location:
     ig_bot "Arrived at [player_location.name]."
     $ fuel_p = get_fuel_percentage()
     ig_bot "Fuel levels are currently at [fuel_p] percent."
-    if fuel_p <= 20:
+    if fuel_p <= 20 and no_of_matches is not 1:
         ig_bot "Have you finished bumbling around yet? We are in danger of running out of fuel."
 
     if fuel_p == 0 and no_of_matches is not 1:
@@ -182,10 +180,7 @@ label where_suspect:
     jump question_agent
 
 label describe_suspect:
-    if active_agent == agent_x:
-        $ clue = x_trait
-    else:
-        $ clue = y_trait
+    $ clue = x_trait
     active_agent "Local rumor states [villain.pronoun] had [clue]."
     jump question_agent
 

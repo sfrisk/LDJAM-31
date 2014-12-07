@@ -23,11 +23,11 @@ init -1 python hide:
     ## This controls the title of the window, when Ren'Py is
     ## running in a window.
 
-    config.window_title = u"LDJAM"
+    config.window_title = u"Space Inquisitor"
 
     # These control the name and version of the game, that are reported
     # with tracebacks and other debugging logs.
-    config.name = "LDJAM"
+    config.name = "Space Inquisitor"
     config.version = "0.0"
 
     #########################################
@@ -307,7 +307,7 @@ init python:
     ## The name that's uses for executables - the program that users will run
     ## to start the game. For example, if this is 'mygame', then on Windows,
     ## users can click 'mygame.exe' to start the game.
-    build.executable_name = "LDJAM"
+    build.executable_name = "Space Inquisitor"
 
     ## If True, Ren'Py will include update information into packages. This
     ## allows the updater to run.

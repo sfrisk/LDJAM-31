@@ -1,5 +1,6 @@
 init python:
     fuel = 100.00
+    fuel_p = 100
     fuel_difficulty = 10.00
     max_fuel = 100.00
 

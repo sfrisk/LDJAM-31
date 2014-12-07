@@ -70,7 +70,7 @@ init python:
     uranus = Location('Uranus')
     uranus.add_clue("heading to a planet with 13 known rings")
     uranus.add_clue("visiting a planet that was discovered by William Herschel")
-    uranus.add_clue("going to a world that was discovered March 13, 1981")
+    uranus.add_clue("going to a world that was discovered March 13, 1781")
     uranus.add_clue("scurrying off to a world with a surface temperature of -197 C")
     uranus.add_clue("visiting the sector with the moon Oberon")
     uranus.add_clue("visiting the sector with the moon Titania")
@@ -80,10 +80,10 @@ init python:
 
     neptune = Location('Neptune')
     neptune.add_clue("visiting a world discovered by Urbain Le Verrier and Johann Galle")
-    uranus.add_clue("heading to a world that was discovered September 23, 1846")
-    uranus.add_clue("checking out a world with an orbital period of 164.8 Earth Years")
-    uranus.add_clue("swinging by the smallest of the ice giants")
-    uranus.add_clue("visiting a planet that takes only 18 hours to make one rotation")
+    neptune.add_clue("heading to a world that was discovered September 23, 1846")
+    neptune.add_clue("checking out a world with an orbital period of 164.8 Earth Years")
+    neptune.add_clue("swinging by the smallest of the ice giants")
+    neptune.add_clue("visiting a planet that takes only 18 hours to make one rotation")
     locations.append(neptune)
 
 

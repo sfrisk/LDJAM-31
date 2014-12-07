@@ -73,6 +73,9 @@ init python:
     eye_type.add_clue("brown puppydog eyes")
     eyes.add_type(copy.deepcopy(eye_type))
 
+    character_traits.append(eyes)
+
+
     skin = Trait('skin')
     skin_type = Trait_Type('Fair')
     skin_type.add_clue("a fair complexion")
@@ -84,7 +87,8 @@ init python:
 
     character_traits.append(skin)
 
-    def get_character_clue():
+
+    def get_character_clue(f):
         trait = character_traits[randrange(len(character_traits))]
         clue = ''
 
@@ -96,5 +100,13 @@ init python:
 
         if trait.name == 'skin':
             clue = trait.get_trait_clue(villain.skin)
+
+        if f == 40:
+            clue = character_traits[0].get_trait_clue(villain.hair)
+        if f == 30:
+            clue = character_traits[1].get_trait_clue(villain.eyes)
+        if f == 20:
+            clue = character_traits[2].trait.get_trait_clue(villain.skin)
+
 
         return clue

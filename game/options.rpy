@@ -284,6 +284,9 @@ init -1 python hide:
 
     config.default_afm_time = None
 
+    config.window_icon = "images/logo.png"
+    config.windows_icon = "images/logo32.png"
+
     #########################################
     ## More customizations can go here.
 

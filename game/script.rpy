@@ -3,6 +3,7 @@ image bg input_background = "images/background-1.png"
 image bg field = "images/background-2.png"
 
 image ig_bot normal = "images/ig-bot.png"
+image agent normal = "images/agent_x.png"
 image computer normal = "images/screen.png"
 
 define ig_bot = Character('IG-BOT', color="#c8ffc8")
@@ -49,12 +50,12 @@ label location_actions:
         "Question Agent X":
             $ active_agent = agent_x
             jump question_agent
-        "Question Agent Y":
-            $ active_agent = agent_y
-            jump question_agent
-        "Record Evidence":
+        # "Question Agent Y":
+        #     $ active_agent = agent_y
+        #     jump question_agent
+        "Access Imperial Criminal Database":
             jump record_evidence
-        "Travel":
+        "Set Travel Destination":
             jump leave_location
 
 label leave_location:
@@ -109,6 +110,7 @@ label trial_and_capture:
 label question_agent:
     scene bg field
     hide ig_bot normal
+    show agent normal
     show computer normal
     active_agent "Agent X reporting from [player_location.name]. What are your orders, Inquisitor?"
     menu:
@@ -136,7 +138,7 @@ label describe_suspect:
     jump question_agent
 
 label dismiss_agent:
-    active_agent "Very good, Inquisitor!"
+    active_agent "Very well, Inquisitor!"
     jump location_actions
 
 label record_evidence:

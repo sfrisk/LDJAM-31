@@ -1,6 +1,10 @@
 image bg standard = "images/background.png"
 image bg input_background = "images/background-1.png"
 image bg field = "images/background-2.png"
+image bg mercury = "images/mercury.png"
+image bg mars = "images/mars.png"
+image bg neptune = "images/neptune.png"
+image bg uranus = "images/uranus.png"
 
 image ig_bot normal = "images/ig-bot.png"
 image agent normal = "images/agent_x.png"
@@ -108,7 +112,14 @@ label trial_and_capture:
     return
 
 label question_agent:
-    scene bg field
+    if player_location.name is 'Mars':
+        scene bg mars
+    if player_location.name is 'Mercury':
+        scene bg mercury
+    if player_location.name is 'Neptune':
+        scene bg neptune
+    if player_location.name is 'Uranus':
+        scene bg uranus
     hide ig_bot normal
     show agent normal
     show computer normal
@@ -142,7 +153,9 @@ label dismiss_agent:
     jump location_actions
 
 label record_evidence:
+    show ig_bot normal
     ig_bot "Initializing Imperial Criminal Database..."
+    hide ig_bot normal
     $ evidence = evidence_recorder(evidence)
     $ matches = calculate_match(evidence)
     $ no_of_matches = len(matches)

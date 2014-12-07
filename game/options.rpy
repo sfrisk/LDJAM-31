@@ -173,8 +173,8 @@ init -1 python hide:
 
     ## Sounds that are used when button and imagemaps are clicked.
 
-    # style.button.activate_sound = "click.wav"
-    # style.imagemap.activate_sound = "click.wav"
+    style.button.activate_sound = "audio/button-click.mp3"
+    style.imagemap.activate_sound = "audio/button-click.mp3"
 
     ## Sounds that are used when entering and exiting the game menu.
 
@@ -183,11 +183,11 @@ init -1 python hide:
 
     ## A sample sound that can be played to check the sound volume.
 
-    # config.sample_sound = "click.wav"
+    config.sample_sound = "audio/button-click.mp3"
 
     ## Music that is played while the user is at the main menu.
 
-    # config.main_menu_music = "main_menu_theme.ogg"
+    config.main_menu_music = "audio/background.mp3"
 
     config.allow_skipping = False
     config.hard_rollback_limit = 0

@@ -18,6 +18,7 @@ define agent_y = Character('Agent Y', color="#c8ffc8")
 
 # The game starts here.
 label start:
+    #play music "audio/background.mp3"
     $ warrent = None
     $ no_of_matches = 0
     $ villain = newVillain()

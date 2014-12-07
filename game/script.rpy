@@ -6,6 +6,8 @@ image bg mars = "images/mars.png"
 image bg neptune = "images/neptune.png"
 image bg uranus = "images/uranus.png"
 
+image splash = "images/splash.png"
+
 image ig_bot normal = "images/ig-bot.png"
 image ig_bot unhappy = "images/ig-bot-unhappy.png"
 image agent normal = "images/agent_x.png"
@@ -16,7 +18,7 @@ define ig_bot = Character('IG-BOT', color="#527018")
 
 define agent_x = Character('Agent X', color="#72110b")
 define agent_y = Character('Agent Y', color="#72110b")
-
+image splash = "splash.png"
 
 # The game starts here.
 label start:

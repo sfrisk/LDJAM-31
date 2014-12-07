@@ -71,7 +71,7 @@ init -1 python hide:
         ## The background of the main menu. This can be a color
         ## beginning with '#', or an image filename. The latter
         ## should take up the full height and width of the screen.
-        mm_root = "#393939",
+        mm_root = "images/splash.png",
 
         ## The background of the game menu. This can be a color
         ## beginning with '#', or an image filename. The latter
@@ -291,6 +291,8 @@ init -1 python hide:
 
     #########################################
     ## More customizations can go here.
+
+
 
 
 ## This section contains information about how to build your project into

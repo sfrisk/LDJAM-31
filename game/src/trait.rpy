@@ -40,7 +40,7 @@ init python:
 
     hair_type = Trait_Type('Brown')
     hair_type.add_clue("hair made me crave chocolate")
-    hair_type.add_clue("dark brown hair was excellently groomed")
+    hair_type.add_clue("dark brown hair that was excellently groomed")
     hair.add_type(copy.deepcopy(hair_type))
 
     hair_type = Trait_Type('Red')

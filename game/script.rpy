@@ -1,11 +1,11 @@
-define e = Character('Computer', color="#c8ffc8")
 
+define e = Character('Computer', color="#c8ffc8")
 define agent_x = Character('Agent X', color="#c8ffc8")
 define agent_y = Character('Agent Y', color="#c8ffc8")
 
 # The game starts here.
 label start:
-
+    $ warrent = None
     $ villain = newVillain()
     show black
     e "A thing has been stollen!"
@@ -90,7 +90,12 @@ label dismiss_agent:
     jump location_actions
 
 label record_evidence:
-    e "Recording evidence isn't currently supported."
+    $ evidence = evidence_recorder(evidence)
+    $ matches = calculate_match(evidence)
+    $ no_of_matches = len(matches)
+    $ warrent = matches[0].name
+    if no_of_matches == 1:
+        e "Warrent issued. All agents keep an eye out for [warrent]."
     jump location_actions
 
 

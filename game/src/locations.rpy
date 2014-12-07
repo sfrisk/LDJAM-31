@@ -54,7 +54,7 @@ init python:
     jupiter.add_clue("planning on stopping by Europa along the way")
     jupiter.add_clue("heading to a planet that orbits the Sun once every 11.8 Earth years")
     jupiter.add_clue("hoping to visit a storm that has been raging for 350 years")
-    jupiter.add_clue("visiting the sector with the largest moon in teh solar system")
+    jupiter.add_clue("visiting the sector with the largest moon in the solar system")
     locations.append(jupiter)
 
     saturn = Location('Saturn')

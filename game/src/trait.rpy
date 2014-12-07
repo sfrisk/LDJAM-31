@@ -39,7 +39,7 @@ init python:
     hair.add_type(copy.deepcopy(hair_type))
 
     hair_type = Trait_Type('Brown')
-    hair_type.add_clue("hair made me crave chocolate")
+    hair_type.add_clue("hair that looked like chocolate")
     hair_type.add_clue("dark brown hair that was excellently groomed")
     hair.add_type(copy.deepcopy(hair_type))
 
@@ -73,7 +73,16 @@ init python:
     eye_type.add_clue("brown puppydog eyes")
     eyes.add_type(copy.deepcopy(eye_type))
 
-    character_traits.append(eyes)
+    skin = Trait('skin')
+    skin_type = Trait_Type('Fair')
+    skin_type.add_clue("a fair complexion")
+    skin.add_type(copy.deepcopy(skin_type))
+
+    skin_type = Trait_Type('Dark')
+    skin_type.add_clue("a dark complextion")
+    skin.add_type(copy.deepcopy(skin_type))
+
+    character_traits.append(skin)
 
     def get_character_clue():
         trait = character_traits[randrange(len(character_traits))]
@@ -84,5 +93,8 @@ init python:
 
         if trait.name == 'hair':
             clue = trait.get_trait_clue(villain.hair)
+
+        if trait.name == 'skin':
+            clue = trait.get_trait_clue(villain.skin)
 
         return clue

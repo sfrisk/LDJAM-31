@@ -3,17 +3,19 @@ init python:
     evidence = None
     warrent = None
     def evidence_recorder(evidence):
-        traits = [ _('Gender'), _('Hair'), _('Eyes') ]
-        traits_small = {'Gender': _('gender'), 'Hair': _('hair'), 'Eyes': _('eyes') }
+        traits = [ _('Gender'), _('Hair'), _('Eyes'), _('Skin') ]
+        traits_small = {'Gender': _('gender'), 'Hair': _('hair'), 'Eyes': _('eyes'), _('Skin'): _('skin') }
 
         choices_gender = [_('Unknown'),_('Male'),_('Female')]
         choices_hair = [_('Unknown'),_('Blond'),_('Brown'),_('Red'),_('Black')]
         choices_eyes = [_('Unknown'),_('Blue'),_('Green'),_('Brown')]
+        choices_skin = [_('Unknown'),_('Fair'),_('Dark')]
 
         if evidence is None:
             evidence = { _('Gender') : _('Unknown'),
                      _('Hair') : _('Unknown'),
-                     _('Eyes') : _('Unknown') }
+                     _('Eyes') : _('Unknown'),
+                     _('Skin') : _('Unknown') }
 
         editing = None
 
@@ -113,7 +115,14 @@ init python:
                                xpos=0,
                                xanchor='left',
                                xminimum=250)
-
+                if renpy.store.traits_small_selected == 'skin':
+                    for i in choices_skin:
+                        button(i,
+                               evidence[editing] == i,
+                               ("set", i),
+                               xpos=0,
+                               xanchor='left',
+                               xminimum=250)
                 ui.close()
 
             type, value = ui.interact()
@@ -135,7 +144,7 @@ init python:
     def calculate_match(evidence):
         matches = []
         for v in villains:
-            if check_trait_match(evidence['Hair'],v.hair) and check_trait_match(evidence['Eyes'],v.eyes) and check_trait_match(evidence['Gender'],v.gender):
+            if check_trait_match(evidence['Hair'],v.hair) and check_trait_match(evidence['Eyes'],v.eyes) and check_trait_match(evidence['Gender'],v.gender) and check_trait_match(evidence['Skin'],v.skin):
                 matches.append(copy.deepcopy(v))
 
         return matches

@@ -1,23 +1,23 @@
 init python:
 
     class Villain(object):
-        def __init__(self, name='', bio='', gender='', hair='', eyes='', skin=''):
+        def __init__(self, name='', bio='', sex='', hair='', eyes='', skin=''):
             self.name = name
             self.bio = bio
-            self.gender = gender
+            self.sex = sex
             self.hair = hair
             self.eyes = eyes
             self.skin = skin
             self.pronoun = self.get_pronoun()
 
         def get_pronoun(self):
-            if self.gender == 'Male':
+            if self.sex == 'Male':
                 return "he"
             else:
                 return "she"
 
         def get_possessive(self):
-            if self.gender == 'Male':
+            if self.sex == 'Male':
                 return 'his'
             else:
                 return 'her'

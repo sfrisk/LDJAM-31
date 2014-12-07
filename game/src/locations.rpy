@@ -84,7 +84,7 @@ init python:
         choices.append(loc)
         choices =  random.sample(choices,4)
         menu = []
-        menu.append(("Where should we go?", None))
+        menu.append(("Destination, Inquistor?", None))
         for c in choices:
             if c.name == loc.name:
                 menu.append((c.name, c.name))

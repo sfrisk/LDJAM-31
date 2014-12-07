@@ -1,4 +1,6 @@
 image bg standard = "images/background.png"
+image bg input_background = "images/background-1.png"
+image bg field = "images/background-2.png"
 
 image ig_bot normal = "images/ig-bot.png"
 image computer normal = "images/screen.png"
@@ -17,7 +19,6 @@ label start:
     scene bg standard
     show ig_bot normal
     show computer normal
-    with dissolve
 
     $ player_location = next_location(None)
 
@@ -40,7 +41,9 @@ label location:
     jump location_actions
 
 label location_actions:
-    show ig_bot normal
+    scene bg input_background
+    hide ig_bot normal
+    show computer normal
     menu:
         ig_bot "What are your orders, Inquisitor?"
         "Question Agent X":
@@ -61,25 +64,33 @@ label leave_location:
         ig_bot "Ok, let's gather more evidence."
         jump location_actions
 
+    scene bg standard
+    show ig_bot normal
+    show computer normal
+
     ig_bot "Traveling to [destination]"
 
     $ player_location = get_location_by_name(destination)
     $ fuel = fuel - fuel_difficulty
-    ig_bot "You have arrived at [player_location.name]."
+    ig_bot "Arrived at [player_location.name]."
     $ fuel_p = get_fuel_percentage()
-    ig_bot "Fuel levels are currently at [fuel_p] percent"
+    ig_bot "Fuel levels are currently at [fuel_p] percent."
+    if fuel_p <= 20:
+        ig_bot "Have you finished bumbling around yet? We are in danger of running out of fuel."
 
-    if fuel_p == 0:
+    if fuel_p == 0 and no_of_matches is not 1:
         jump game_over
 
     if location.name == player_location.name:
         if no_of_matches is not 1:
-            ig_bot "You are hot on the trail! Seems like the rebel scum has been here recently."
+            ig_bot "It would seem you aren't as incompetent as your predecessor."
+            ig_bot "Scans indicate that the suspect was recently spotted in this sector."
             jump location
         else:
             jump trial_and_capture
     else:
-        ig_bot "Doesn't seem to be any criminal activity around here. Perhaps you should review with your staff again."
+        ig_bot "Our scan would suggest that there hasn't been any criminal activity in this sector for quite some time."
+        ig_bot "Might I suggest to review the information provided to you by the agents?"
         jump location_actions
 
 label trial_and_capture:
@@ -96,14 +107,16 @@ label trial_and_capture:
     return
 
 label question_agent:
+    scene bg field
     hide ig_bot normal
-    active_agent "What would you like to know, boss?"
+    show computer normal
+    active_agent "Agent X reporting from [player_location.name]. What are your orders, Inquisitor?"
     menu:
-        "Where did the suspect go?":
+        "Rebel's Destination":
             jump where_suspect
-        "Tell me about the suspect":
+        "Rebel's Description":
             jump describe_suspect
-        "Very good agent. You're dismissed.":
+        "Dismiss":
             jump dismiss_agent
 
 label where_suspect:
@@ -111,7 +124,7 @@ label where_suspect:
         $ clue = x_clue
     else:
         $ clue = y_clue
-    active_agent "Local rumor states the rebel said [villain.pronoun] was going to [clue]."
+    active_agent "Our sources indicate that [villain.pronoun] was [clue]."
     jump question_agent
 
 label describe_suspect:
@@ -123,12 +136,11 @@ label describe_suspect:
     jump question_agent
 
 label dismiss_agent:
-    active_agent "Yes, sir!"
+    active_agent "Very good, Inquisitor!"
     jump location_actions
 
 label record_evidence:
     ig_bot "Initializing Imperial Criminal Database..."
-    hide ig_bot normal
     $ evidence = evidence_recorder(evidence)
     $ matches = calculate_match(evidence)
     $ no_of_matches = len(matches)

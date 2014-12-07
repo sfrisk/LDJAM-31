@@ -1,6 +1,6 @@
 init python:
     fuel = 100.00
-    fuel_difficulty = 20.00
+    fuel_difficulty = 10.00
     max_fuel = 100.00
 
     def fuel_guage(st, at):

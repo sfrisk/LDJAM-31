@@ -63,7 +63,7 @@ init python:
     saturn.add_clue("visiting a planet with more than 30 rings")
     saturn.add_clue("going to the flattest planet")
     saturn.add_clue("heading to a world that orbits the Sun once every 29.4 years")
-    saturn.add_clue("was named after the Greek god Cronus")
+    saturn.add_clue("visiting a planet named after the Greek god Cronus")
     locations.append(saturn)
 
 
@@ -97,10 +97,10 @@ init python:
 
         return locations_copy[randrange(len(locations_copy))]
 
-    def location_menu(loc):
-        locations_copy = copy.deepcopy(locations)
+    def location_menu(loc, p_loc):
+        locations_copy = copy.deepcopy(locations,)
         for l in locations_copy:
-            if l.name == loc.name:
+            if l.name == loc.name or l.name == p_loc:
                 locations_copy.remove(l)
 
         choices = random.sample(locations_copy, 3)

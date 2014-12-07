@@ -6,6 +6,15 @@ image bg mars = "images/mars.png"
 image bg neptune = "images/neptune.png"
 image bg uranus = "images/uranus.png"
 
+image bg t_mercury = "images/travel-mercury.png"
+image bg t_venus = "images/travel-venus.png"
+image bg t_earth = "images/travel-earth.png"
+image bg t_mars = "images/travel-mars.png"
+image bg t_jupiter = "images/travel-jupiter.png"
+image bg t_saturn = "images/travel-saturn.png"
+image bg t_uranus = "images/travel-uranus.png"
+image bg t_neptune = "images/travel-neptune.png"
+
 image splash = "images/splash.png"
 
 image ig_bot normal = "images/ig-bot.png"
@@ -48,9 +57,13 @@ label start:
     show ig_bot normal
     show computer normal
     ig_bot "According to the dossier the Admiral has forwarded to me, we shall first begin investigating [player_location.name], where the top secret plans were stollen."
+    $ destination = player_location.name
+    $ first = True
+    jump traveling
 
 label location:
     $ location = next_location(player_location)
+    $ first = False
     $ x_clue = location.get_rand_clue()
     $ x_trait = get_character_clue(fuel_p)
 
@@ -74,44 +87,71 @@ label location_actions:
             jump leave_location
 
 label leave_location:
-    $ destination = location_menu(location)
+    $ destination = location_menu(location, player_location)
 
     if destination == 'Back':
         ig_bot "Ok, let's gather more evidence."
         jump location_actions
 
+    jump traveling
+
+label traveling:
+
+    if destination is "Mercury":
+        scene bg t_mercury
+    if destination is "Venus":
+        scene bg t_venus
+    if destination is "Earth":
+        scene bg t_earth
+    if destination is "Mars":
+        scene bg t_mars
+    if destination is "Jupiter":
+        scene bg t_jupiter
+    if destination is "Saturn":
+        scene bg t_saturn
+    if destination is "Uranus":
+        scene bg t_uranus
+    if destination is "Neptune":
+        scene bg t_neptune
+
+    show computer normal
+    ig_bot "Traveling to [destination]"
+
+
+    hide computer normal
     scene bg standard
     show ig_bot normal
     show computer normal
 
-    ig_bot "Traveling to [destination]"
+    ig_bot "Welcome to [destination]."
+    if first != True:
+        $ player_location = get_location_by_name(destination)
+        $ fuel = fuel - fuel_difficulty
+        $ fuel_p = get_fuel_percentage()
+        ig_bot "Fuel levels are currently at [fuel_p] percent."
+        if fuel_p <= 20 and no_of_matches is not 1:
+            ig_bot "Have you finished bumbling around yet? We are in danger of running out of fuel."
 
-    $ player_location = get_location_by_name(destination)
-    $ fuel = fuel - fuel_difficulty
-    ig_bot "Arrived at [player_location.name]."
-    $ fuel_p = get_fuel_percentage()
-    ig_bot "Fuel levels are currently at [fuel_p] percent."
-    if fuel_p <= 20 and no_of_matches is not 1:
-        ig_bot "Have you finished bumbling around yet? We are in danger of running out of fuel."
+        if fuel_p == 0 and no_of_matches is not 1:
+            jump game_over
 
-    if fuel_p == 0 and no_of_matches is not 1:
-        jump game_over
-
-    if location.name == player_location.name:
-        if no_of_matches is not 1:
-            ig_bot "It would seem you aren't as incompetent as your predecessor."
-            ig_bot "Scans indicate that the suspect was recently spotted in this sector."
-            jump location
+        if location.name == player_location.name:
+            if no_of_matches is not 1:
+                ig_bot "It would seem you aren't as incompetent as your predecessor."
+                ig_bot "Scans indicate that the suspect was recently spotted in this sector."
+                jump location
+            else:
+                jump trial_and_capture
         else:
-            jump trial_and_capture
-    else:
-        hide ig_bot normal
-        hide computer normal
-        show ig_bot unhappy
-        show computer normal
-        ig_bot "Our scan would suggest that there hasn't been any criminal activity in this sector for quite some time."
-        ig_bot "Might I suggest to review the information provided to you by the agents?"
-        jump location_actions
+            hide ig_bot normal
+            hide computer normal
+            show ig_bot unhappy
+            show computer normal
+            ig_bot "Our scan would suggest that there hasn't been any criminal activity in this sector for quite some time."
+            ig_bot "Might I suggest to review the information provided to you by the agents?"
+            jump location_actions
+    if first == True:
+        jump location
 
 label trial_and_capture:
     show ig_bot normal

@@ -217,6 +217,7 @@ label trial_and_capture:
             show theif dude
         else:
             show theif lady
+        show computer normal
 
         rebel "I'm innocent! Innocent I tell you! I had nothing to do with the stollen plans!"
 
@@ -228,8 +229,8 @@ label trial_and_capture:
 
         show agent normal
         show computer normal
-        agent_x "Unfortunately, [warrent] is right."
-        agent_x "[warrent] didn't have the plans on them, and interrogation provided us with no leads."
+        agent_x "Unfortunately, [warrent] was correct."
+        agent_x "[warrent] had no knowledge of the hidden rebel plans, and interrogation provided us with no leads."
 
         hide agent normal
         hide computer normal

@@ -21,10 +21,12 @@ image ig_bot normal = "images/ig-bot.png"
 image ig_bot unhappy = "images/ig-bot-unhappy.png"
 image agent normal = "images/agent_x.png"
 image computer normal = "images/screen.png"
+image theif lady = "images/lady-rebel.png"
+image theif dude = "images/man-rebel.png"
 
 define ig_bot = Character('IG-BOT', color="#527018")
 
-
+define rebel = Character("rebel", dynamic=True)
 define agent_x = Character('Agent X', color="#72110b")
 define agent_y = Character('Agent Y', color="#72110b")
 image splash = "splash.png"
@@ -137,8 +139,7 @@ label traveling:
 
         if location.name == player_location.name:
             if no_of_matches is not 1:
-                ig_bot "It would seem you aren't as incompetent as your predecessor."
-                ig_bot "Scans indicate that the suspect was recently spotted in this sector."
+                ig_bot "Intel suggestions there was recent rebel activity in this area."
                 jump location
             else:
                 jump trial_and_capture
@@ -155,6 +156,7 @@ label traveling:
 
 label trial_and_capture:
     show ig_bot normal
+    show computer normal
     ig_bot "Our scanner indicates that the rebel criminal, [warrent], is in the area."
     ig_bot "Agents mobilizing for the capture of [warrent]."
     hide ig_bot normal
@@ -174,18 +176,66 @@ label trial_and_capture:
 
     hide agent normal
     hide computer normal
-    show ig_bot normal
-    show computer normal
+    #show ig_bot normal
+    #show computer normal
+
+    $ rebel = warrent
 
     # Note, create admiral character and add here
     if warrent == villain.name:
-        ig_bot "Congratulations, you have successfully apprehended the right person."
+        if getGenderByName(warrent) == 'Male':
+            show theif dude
+        else:
+            show theif lady
+
+        show computer normal
+
+        rebel "The Rebel Alliance shall avenge me! The Empire will fall!"
+
+        if getGenderByName(warrent) == 'Male':
+            hide theif dude
+        else:
+            hide theif lady
+
+        hide computer normal
+
+
+        show agent normal
+        show computer normal
+        agent_x "That's enough out of you."
+        agent_x "[warrent] was in procession of the plans. The glory of the Empire shall last another day."
+
+        hide agent normal
+        hide computer normal
+
+        show ig_bot normal
+        show computer normal
+        ig_bot "Congratulations, you have successfully apprehended the rebel scum."
+
     else:
-        hide ig_bot normal
+        if getGenderByName(warrent) == 'Male':
+            show theif dude
+        else:
+            show theif lady
+
+        rebel "I'm innocent! Innocent I tell you! I had nothing to do with the stollen plans!"
+
+        if getGenderByName(warrent) == 'Male':
+            hide theif dude
+        else:
+            hide theif lady
+        hide computer normal
+
+        show agent normal
+        show computer normal
+        agent_x "Unfortunately, [warrent] is right."
+        agent_x "[warrent] didn't have the plans on them, and interrogation provided us with no leads."
+
+        hide agent normal
         hide computer normal
         show ig_bot unhappy
         show computer normal
-        ig_bot "Unfortunately, it would seem [warrent] had nothing to do with the capture of the thing.  Way to mess up."
+        ig_bot "I see that like your predecessor, you have proven to be a waste of Imperial resources.  You are dismissed."
 
     return
 

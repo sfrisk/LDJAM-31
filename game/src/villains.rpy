@@ -33,4 +33,11 @@ init python:
     def newVillain():
         return villains[randrange(len(villains))]
 
+    def getGenderByName(name):
+        for v in villains:
+            if v.name is name:
+                return v.gender
+        return None
+
+
     villain = Villain()

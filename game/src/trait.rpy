@@ -70,7 +70,7 @@ init python:
 
     eye_type = Trait_Type('Brown')
     eye_type.add_clue("eyes the color of dirt")
-    eye_type.add_clue("brown puppydog eyes")
+    eye_type.add_clue("brown puppy dog eyes")
     eyes.add_type(copy.deepcopy(eye_type))
 
     character_traits.append(eyes)

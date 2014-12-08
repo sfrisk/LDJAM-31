@@ -34,7 +34,7 @@ image splash = "splash.png"
 # The game starts here.
 label start:
     #play music "audio/background.mp3"
-    $ warrent = None
+    $ warrant = None
     $ no_of_matches = 0
     $ villain = newVillain()
     scene bg standard
@@ -58,7 +58,7 @@ label start:
     hide computer normal
     show ig_bot normal
     show computer normal
-    ig_bot "According to the dossier the Admiral has forwarded to me, we shall first begin investigating [player_location.name], where the top secret plans were stollen."
+    ig_bot "According to the dossier the Admiral has forwarded to me, we shall first begin investigating [player_location.name], where the top secret plans were stolen."
     $ destination = player_location.name
     $ first = True
     jump traveling
@@ -157,8 +157,8 @@ label traveling:
 label trial_and_capture:
     show ig_bot normal
     show computer normal
-    ig_bot "Our scanner indicates that the rebel criminal, [warrent], is in the area."
-    ig_bot "Agents mobilizing for the capture of [warrent]."
+    ig_bot "Our scanner indicates that the rebel criminal, [warrant], is in the area."
+    ig_bot "Agents mobilizing for the capture of [warrant]."
     hide ig_bot normal
     hide computer normal
     scene bg field
@@ -172,18 +172,18 @@ label trial_and_capture:
         scene bg uranus
     show agent normal
     show computer normal
-    agent_x "[warrent] has been captured and is currently awaiting processing."
+    agent_x "[warrant] has been captured and is currently awaiting processing."
 
     hide agent normal
     hide computer normal
     #show ig_bot normal
     #show computer normal
 
-    $ rebel = warrent
+    $ rebel = warrant
 
     # Note, create admiral character and add here
-    if warrent == villain.name:
-        if getGenderByName(warrent) == 'Male':
+    if warrant == villain.name:
+        if getGenderByName(warrant) == 'Male':
             show theif dude
         else:
             show theif lady
@@ -192,7 +192,7 @@ label trial_and_capture:
 
         rebel "The Rebel Alliance shall avenge me! The Empire will fall!"
 
-        if getGenderByName(warrent) == 'Male':
+        if getGenderByName(warrant) == 'Male':
             hide theif dude
         else:
             hide theif lady
@@ -203,7 +203,7 @@ label trial_and_capture:
         show agent normal
         show computer normal
         agent_x "That's enough out of you."
-        agent_x "[warrent] was in procession of the plans. The glory of the Empire shall last another day."
+        agent_x "[warrant] was in procession of the plans. The glory of the Empire shall last another day."
 
         hide agent normal
         hide computer normal
@@ -213,15 +213,15 @@ label trial_and_capture:
         ig_bot "Congratulations, you have successfully apprehended the rebel scum."
 
     else:
-        if getGenderByName(warrent) == 'Male':
+        if getGenderByName(warrant) == 'Male':
             show theif dude
         else:
             show theif lady
         show computer normal
 
-        rebel "I'm innocent! Innocent I tell you! I had nothing to do with the stollen plans!"
+        rebel "I'm innocent! Innocent I tell you! I had nothing to do with the stolen plans!"
 
-        if getGenderByName(warrent) == 'Male':
+        if getGenderByName(warrant) == 'Male':
             hide theif dude
         else:
             hide theif lady
@@ -229,8 +229,8 @@ label trial_and_capture:
 
         show agent normal
         show computer normal
-        agent_x "Unfortunately, [warrent] was correct."
-        agent_x "[warrent] had no knowledge of the hidden rebel plans, and interrogation provided us with no leads."
+        agent_x "Unfortunately, [warrant] was correct."
+        agent_x "[warrant] had no knowledge of the hidden rebel plans, and interrogation provided us with no leads."
 
         hide agent normal
         hide computer normal
@@ -289,14 +289,14 @@ label record_evidence:
     $ matches = calculate_match(evidence)
     $ no_of_matches = len(matches)
     if no_of_matches is 0:
-        $ warrent = None
+        $ warrant = None
     else:
-        $ warrent = matches[0].name
+        $ warrant = matches[0].name
     hide computer normal
     show ig_bot normal
     show computer normal
     if no_of_matches == 1:
-        ig_bot "Warrent issued. All agents keep an eye out for [warrent]."
+        ig_bot "Warrant issued. All agents keep an eye out for [warrant]."
     jump location_actions
 
 

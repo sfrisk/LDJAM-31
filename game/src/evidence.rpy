@@ -1,7 +1,7 @@
 init python:
     import copy
     evidence = None
-    warrent = None
+    warrant = None
     def evidence_recorder(evidence):
         traits = [ _('Gender'), _('Hair'), _('Eyes'), _('Skin') ]
         traits_small = {'Gender': _('gender'), 'Hair': _('hair'), 'Eyes': _('eyes'), _('Skin'): _('skin') }
@@ -74,7 +74,7 @@ init python:
                 renpy.store.criminal_name = calculate_match(evidence)[0].name
                 ui.text(_("{b}Match Found!{/b}"))
                 ui.null(height=20)
-                ui.text(_("Warrent issued for [criminal_name!t]."))
+                ui.text(_("Warrant issued for [criminal_name!t]."))
             ui.close()
 
             # Choice window.

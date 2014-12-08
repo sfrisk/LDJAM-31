@@ -106,7 +106,7 @@ init python:
         if f == 30:
             clue = character_traits[1].get_trait_clue(villain.eyes)
         if f == 20:
-            clue = character_traits[2].trait.get_trait_clue(villain.skin)
+            clue = character_traits[2].get_trait_clue(villain.skin)
 
 
         return clue

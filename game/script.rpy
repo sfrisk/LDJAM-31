@@ -46,7 +46,7 @@ label start:
     ig_bot "Greetings, Inquisitor."
     ig_bot "I am IG-BOT 1148.  I have been assigned to you by the Admiral to help aid you with tracking down rebel agents."
     ig_bot "My job is to help you coordinate with Imperial Agents on the field, and provide you with access to my state of the art criminal database."
-    ig_bot "By imputing search parameters based on the description of the rebel scum, I shall be able to accurately provide you with a warrant for arrest."
+    ig_bot "By inputing search parameters based on the description of the rebel scum, I shall be able to accurately provide you with a warrant for arrest."
     hide ig_bot normal
     hide computer normal
     show ig_bot unhappy
@@ -203,7 +203,7 @@ label trial_and_capture:
         show agent normal
         show computer normal
         agent_x "That's enough out of you."
-        agent_x "[warrant] was in procession of the plans. The glory of the Empire shall last another day."
+        agent_x "[warrant] was in possession of the plans. The glory of the Empire shall last another day."
 
         hide agent normal
         hide computer normal

@@ -131,10 +131,10 @@ label traveling:
         $ fuel = fuel - fuel_difficulty
         $ fuel_p = get_fuel_percentage()
         ig_bot "Fuel levels are currently at [fuel_p] percent."
-        if fuel_p <= 20 and no_of_matches is not 1:
+        if fuel_p <= 20 and fuel_p > 0 and no_of_matches is not 1:
             ig_bot "Have you finished bumbling around yet? We are in danger of running out of fuel."
 
-        if fuel_p == 0 and no_of_matches is not 1:
+        if fuel_p <= 0 and no_of_matches is not 1:
             jump game_over
 
         if location.name == player_location.name:
